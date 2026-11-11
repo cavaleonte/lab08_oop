@@ -1,8 +1,13 @@
 package it.unibo.mvc;
 
+import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
+//import javax.swing.JTextField;
+//import javax.swing.border.Border;
+
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.Toolkit;
@@ -30,9 +35,14 @@ public class MiniGUI {
      */
     public MiniGUI() {
         final JPanel canvas = new JPanel();
+        final JPanel test = new JPanel();
+        final JLabel result = new JLabel("Result: ");
         canvas.setLayout(new BorderLayout());
+        test.setLayout(new BoxLayout(test, BoxLayout.LINE_AXIS));
         final JButton write = new JButton("Print a random number on standard output");
-        canvas.add(write, BorderLayout.CENTER);
+        canvas.add(test, BorderLayout.CENTER);
+        canvas.add(result, BorderLayout.NORTH);
+        test.add(write);
         frame.setContentPane(canvas);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         /*
@@ -41,7 +51,9 @@ public class MiniGUI {
         write.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(final ActionEvent e) {
-                IO.println(randomGenerator.nextInt());
+                final int tmp = randomGenerator.nextInt();
+                IO.println(tmp);
+                result.setText("Result: " + tmp);
             }
         });
     }
